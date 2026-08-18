@@ -1,0 +1,24 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local databases and generated files
+data/*.db
+data/*.sqlite
+data/*.json
+
+# Foundry Local model files
+foundry_local_data/
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db

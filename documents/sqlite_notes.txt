@@ -1,0 +1,3 @@
+SQLite is a lightweight and serverless relational database. It stores an entire database in a single local file and does not require a separate database server.
+
+In this RAG application, SQLite stores the document source, chunk index, textual content, and embedding vector. Embeddings are serialized as JSON before they are written to the database. During semantic search, the application reads the embeddings and compares them with the user's question.
