@@ -1,0 +1,9 @@
+DOCUMENT STATUS: Current and approved
+OWNER: Cybersecurity Response Team
+LAST REVIEWED: July 2026
+
+When an employee suspects ransomware or malware, the affected computer must be disconnected from wired and wireless networks immediately. The employee should unplug the Ethernet cable and disable Wi-Fi, but must not power off or restart the computer unless instructed by the Cybersecurity Response Team. Keeping the device powered on may preserve volatile evidence required for investigation.
+
+The employee must stop using the affected device and report the incident through the emergency security phone line. The report should include the employee's name, department, device identifier, approximate incident time, and a description of visible messages or unusual behavior. Employees must not attempt to remove malware, delete files, communicate with an attacker, or pay a ransom.
+
+During the first thirty minutes, the IT lead should isolate affected network segments, preserve system logs, identify potentially impacted accounts, and notify the incident commander. The operations manager should determine which critical business activities are affected and activate approved manual workarounds where necessary.

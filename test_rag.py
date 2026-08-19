@@ -7,27 +7,33 @@ def main():
     try:
         pipeline.start()
 
+        role = "Operations Manager"
+
         question = (
-            "How does this application store and use "
-            "document embeddings?"
+            "Several employee computers appear to be "
+            "locked by ransomware. What should I do "
+            "during the first 30 minutes, and should "
+            "the affected computers be powered off?"
         )
 
-        print(f"\nQuestion: {question}")
+        print(f"\nRole: {role}")
+        print(f"Question: {question}")
 
         result = pipeline.answer(
-            question,
-            top_k=3
+            question=question,
+            role=role,
+            top_k=4
         )
 
-        print("\nGrounded answer:")
+        print("\nCrisisLens response:")
         print(result["answer"])
 
-        print("\nRetrieved sources:")
+        print("\nRetrieved evidence:")
 
         for source in result["sources"]:
             print(
                 f"- {source['source']} "
-                f"(similarity: {source['score']:.4f})"
+                f"(relevance: {source['score']:.4f})"
             )
 
     finally:
