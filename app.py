@@ -1,38 +1,157 @@
-import traceback
+import requests
 import streamlit as st
 
-from src.database import get_chunk_count
-from src.rag_pipeline import RAGPipeline
+
+BACKEND_URL = "http://127.0.0.1:8000"
 
 
 st.set_page_config(
-    page_title="CrisisLens Local",
-    page_icon="🛡️",
-    layout="wide"
+    page_title="PolicyTrace EDU",
+    page_icon="📘",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 
 st.markdown(
     """
     <style>
-        .block-container {
-            max-width: 1100px;
-            padding-top: 2rem;
+        .stApp {
+            background:
+                linear-gradient(
+                    180deg,
+                    #f7f6f2 0%,
+                    #ffffff 42%
+                );
         }
 
-        .status-card {
-            padding: 0.8rem 1rem;
-            border: 1px solid #B7E4C7;
-            border-radius: 0.7rem;
-            background: #F0FFF4;
-            color: #175C35;
+        .block-container {
+            max-width: 1080px;
+            padding-top: 2.8rem;
+            padding-bottom: 4rem;
+        }
+
+        .academic-label {
+            color: #92733f;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.16rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .academic-title {
+            color: #173b63;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.08;
+        }
+
+        .academic-title span {
+            color: #92733f;
+        }
+
+        .subtitle {
+            color: #607086;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 720px;
+            margin-top: 0.8rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .section-label {
+            color: #173b63;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        .section-description {
+            color: #718096;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .status-success {
+            padding: 0.9rem 1rem;
+            border: 1px solid #b6d1c2;
+            border-radius: 0.65rem;
+            background-color: #eff8f3;
+            color: #285942;
             margin-bottom: 1rem;
         }
 
-        .hero-subtitle {
-            color: #667085;
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
+        .status-error {
+            padding: 0.9rem 1rem;
+            border: 1px solid #dfb5b5;
+            border-radius: 0.65rem;
+            background-color: #fff4f4;
+            color: #8b3131;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-note {
+            padding: 0.85rem 1rem;
+            border-left: 3px solid #92733f;
+            background-color: #f8f4ea;
+            color: #5f5544;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-top: 1rem;
+        }
+
+        div[data-testid="stForm"] {
+            background-color: #ffffff;
+            border: 1px solid #d8dee8;
+            border-radius: 0.85rem;
+            padding: 1.35rem;
+            box-shadow: 0 8px 25px rgba(23, 59, 99, 0.06);
+        }
+
+        div[data-testid="stSidebar"] {
+            background-color: #edf1f5;
+            border-right: 1px solid #d6dde7;
+        }
+
+        div[data-testid="stSidebar"] h2,
+        div[data-testid="stSidebar"] h3 {
+            color: #173b63;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        div[data-testid="stMetric"] {
+            background-color: #ffffff;
+            border: 1px solid #d8dee8;
+            border-radius: 0.7rem;
+            padding: 0.75rem;
+        }
+
+        .stFormSubmitButton > button {
+            background-color: #1f4e79;
+            border: 1px solid #1f4e79;
+            border-radius: 0.5rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .stFormSubmitButton > button:hover {
+            background-color: #173b63;
+            border-color: #173b63;
+            color: #ffffff;
+        }
+
+        div[data-testid="stExpander"] {
+            border: 1px solid #d8dee8;
+            border-radius: 0.65rem;
+            background-color: #ffffff;
+        }
+
+        #MainMenu,
+        footer,
+        div[data-testid="stToolbar"] {
+            visibility: hidden;
         }
     </style>
     """,
@@ -40,23 +159,71 @@ st.markdown(
 )
 
 
-@st.cache_resource(show_spinner=False)
-def load_pipeline():
-    """Load and cache the local AI models."""
+def get_backend_health():
+    """Check whether the local inference backend is ready."""
 
-    pipeline = RAGPipeline()
-    pipeline.start()
+    try:
+        response = requests.get(
+            f"{BACKEND_URL}/health",
+            timeout=5
+        )
 
-    return pipeline
+        if response.ok:
+            return response.json()
+
+    except requests.RequestException:
+        return None
+
+    return None
 
 
-st.title("🛡️ CrisisLens Local")
+def request_analysis(question, role, top_k):
+    """Send a policy question to the local backend."""
+
+    response = requests.post(
+        f"{BACKEND_URL}/analyze",
+        json={
+            "question": question,
+            "role": role,
+            "top_k": top_k
+        },
+        timeout=900
+    )
+
+    try:
+        data = response.json()
+
+    except ValueError:
+        raise RuntimeError(
+            "The local backend returned an invalid response."
+        )
+
+    if not response.ok:
+        raise RuntimeError(
+            data.get("error", "Unknown backend error.")
+        )
+
+    return data
+
+
+health = get_backend_health()
+
 
 st.markdown(
     """
-    <div class="hero-subtitle">
-        Private, offline and evidence-grounded operational
-        crisis assistance
+    <div class="academic-label">
+        ACADEMIC POLICY INTELLIGENCE
+    </div>
+
+    <div class="academic-title">
+        PolicyTrace <span>EDU</span>
+    </div>
+
+    <div class="subtitle">
+        A version-aware institutional memory assistant that
+        helps students and academic staff identify applicable
+        university policies, supporting evidence and unresolved
+        policy conflicts.
     </div>
     """,
     unsafe_allow_html=True
@@ -64,137 +231,224 @@ st.markdown(
 
 
 with st.sidebar:
-    st.header("System status")
+    st.header("System")
+
+    if health:
+        st.markdown(
+            """
+            <div class="status-success">
+                ● Local policy engine connected<br>
+                Private on-device inference
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.write(
+            f"**Chat model**  \n"
+            f"{health.get('chat_model', 'Phi-4 Mini')}"
+        )
+
+        st.write(
+            f"**Embedding model**  \n"
+            f"{health.get('embedding_model', 'Qwen3 Embedding')}"
+        )
+
+        st.metric(
+            "Indexed policy sections",
+            health.get("indexed_chunks", 0)
+        )
+
+    else:
+        st.markdown(
+            """
+            <div class="status-error">
+                ● Local policy engine unavailable
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.info(
+            "Start backend.py in a separate "
+            "PowerShell window."
+        )
+
+    st.divider()
+
+    st.subheader("Privacy")
 
     st.markdown(
         """
-        <div class="status-card">
-            ● Local processing enabled<br>
-            No cloud API or external inference
+        <div class="privacy-note">
+            Policy documents, questions and model responses
+            remain on this device. No cloud inference API
+            is used.
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    st.write("**Chat model:** Phi-4 Mini")
-    st.write("**Embedding model:** Qwen3 Embedding")
-    st.write(f"**Indexed evidence:** {get_chunk_count()} chunks")
-
     st.divider()
 
-    st.header("Response settings")
-
-    role = st.selectbox(
-        "Organizational role",
-        [
-            "Operations Manager",
-            "IT Lead",
-            "Employee",
-            "Incident Commander",
-            "Communications Lead"
-        ]
+    st.caption(
+        "Prototype developed with Microsoft Foundry Local."
     )
 
-    top_k = st.slider(
-        "Evidence chunks",
-        min_value=2,
-        max_value=4,
-        value=4,
-        help=(
-            "Number of document chunks supplied "
-            "to the local language model."
+
+st.markdown(
+    """
+    <div class="section-label">
+        Ask a policy question
+    </div>
+
+    <div class="section-description">
+        Select your academic role and ask which policy,
+        version or procedure applies.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+default_question = (
+    "The older exchange guide and the current academic "
+    "policy describe different approval steps. Which "
+    "procedure should a student follow, and what evidence "
+    "supports the answer?"
+)
+
+
+with st.form("policy_analysis_form"):
+    first_column, second_column = st.columns([2, 1])
+
+    with first_column:
+        role = st.selectbox(
+            "Academic role",
+            [
+                "Student",
+                "Academic Advisor",
+                "Department Administrator"
+            ]
+        )
+
+    with second_column:
+        top_k = st.selectbox(
+            "Evidence sections",
+            [2, 3, 4],
+            index=1
+        )
+
+    question = st.text_area(
+        "Policy or procedure question",
+        value=default_question,
+        height=145,
+        placeholder=(
+            "Ask about exchange recognition, "
+            "academic procedures or policy versions..."
         )
     )
 
-
-scenario_questions = {
-    "Ransomware response": (
-        "Several employee computers appear to be locked "
-        "by ransomware. What should I do during the first "
-        "30 minutes, and should the affected computers "
-        "be powered off?"
-    ),
-    "External communication": (
-        "A journalist has contacted an employee about "
-        "the incident. What information can the employee "
-        "share and who should respond?"
-    ),
-    "Extended disruption": (
-        "Critical systems may remain unavailable for more "
-        "than four hours. What continuity actions and "
-        "records are required?"
-    ),
-    "Missing information test": (
-        "What is the emergency cybersecurity phone number?"
+    analyze_button = st.form_submit_button(
+        "Review applicable policies",
+        type="primary",
+        width="stretch"
     )
-}
 
 
-st.subheader("Incident analysis")
+if analyze_button:
+    if not health:
+        st.error(
+            "The local backend is not running. "
+            "Start backend.py first."
+        )
 
-selected_scenario = st.selectbox(
-    "Example scenario",
-    list(scenario_questions.keys())
-)
-
-question = st.text_area(
-    "Describe the incident or ask a question",
-    value=scenario_questions[selected_scenario],
-    height=140
-)
-
-
-if st.button(
-    "Analyze incident",
-    type="primary",
-    width="stretch"
-):
-    if not question.strip():
-        st.warning("Please describe an incident or question.")
+    elif not question.strip():
+        st.warning("Please enter a policy question.")
 
     else:
         with st.spinner(
-            "Loading local models and analyzing evidence..."
+            "Reviewing policy versions and retrieved evidence..."
         ):
             try:
-                pipeline = load_pipeline()
-
-                result = pipeline.answer(
+                result = request_analysis(
                     question=question,
                     role=role,
                     top_k=top_k
                 )
 
+            except requests.Timeout:
+                st.error(
+                    "The local model exceeded the response timeout."
+                )
+                st.stop()
+
+            except requests.ConnectionError:
+                st.error(
+                    "The connection to the local backend was lost."
+                )
+                st.stop()
+
             except Exception as error:
-                error_details = traceback.format_exc()
-
-                print(error_details)
-
                 st.error(f"Analysis failed: {error}")
-
-                with st.expander("Technical error details"):
-                    st.code(error_details)
-
                 st.stop()
 
         st.divider()
 
-        st.subheader("Grounded response")
+        st.markdown(
+            """
+            <div class="section-label">
+                Policy guidance
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
         st.markdown(result["answer"])
+
+        response_time = result.get(
+            "response_time_seconds"
+        )
+
+        if response_time is not None:
+            st.caption(
+                f"Generated locally in "
+                f"{response_time} seconds."
+            )
 
         st.divider()
 
-        st.subheader("Retrieved evidence")
+        st.markdown(
+            """
+            <div class="section-label">
+                Evidence trace
+            </div>
+
+            <div class="section-description">
+                Retrieved policy sections used to construct
+                the response.
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         for index, source in enumerate(
-            result["sources"],
+            result.get("sources", []),
             start=1
         ):
-            score = source["score"]
-            progress_value = max(0.0, min(1.0, score))
+            score = source.get("score", 0.0)
+            progress_value = max(
+                0.0,
+                min(1.0, score)
+            )
+
+            source_name = source.get(
+                "source",
+                "Unknown policy"
+            )
 
             label = (
-                f"{index}. {source['source']} "
+                f"{index}. {source_name} "
                 f"— relevance {score:.4f}"
             )
 
@@ -202,17 +456,23 @@ if st.button(
                 st.progress(progress_value)
 
                 st.caption(
-                    f"Chunk {source['chunk_index']} · "
+                    f"Section "
+                    f"{source.get('chunk_index', 0)} · "
                     f"Semantic relevance {score:.4f}"
                 )
 
-                st.write(source["content"])
+                st.write(
+                    source.get(
+                        "content",
+                        "No policy text available."
+                    )
+                )
 
 
 st.divider()
 
 st.caption(
-    "CrisisLens Local is a demonstration system using "
-    "synthetic documents. It does not replace authorized "
-    "emergency, cybersecurity, legal or safety professionals."
+    "PolicyTrace EDU is a research prototype. Its responses "
+    "must be verified against official university sources and "
+    "do not replace authorized academic or administrative guidance."
 )
