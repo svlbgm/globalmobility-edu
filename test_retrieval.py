@@ -4,54 +4,48 @@ from src.retrieval import search_chunks
 
 
 def main():
-    config = Configuration(
-        app_name="microsoft_local_rag",
-        log_level="info"
+    configuration = Configuration(
+        app_name="globalmobility_retrieval_test",
+        log_level="info",
     )
-
-    FoundryLocalManager.initialize(config)
+    FoundryLocalManager.initialize(configuration)
     manager = FoundryLocalManager.instance
-
-    embedding_model = manager.catalog.get_model(
-        "qwen3-embedding-0.6b"
-    )
+    model = manager.catalog.get_model("qwen3-embedding-0.6b")
 
     try:
-        print("Loading the embedding model...")
-
-        embedding_model.download()
-        embedding_model.load()
-
-        embedding_client = (
-            embedding_model.get_embedding_client()
-        )
-
+        model.download()
+        model.load()
+        client = model.get_embedding_client()
         question = (
-            "Where and how are embeddings stored "
-            "in this application?"
+            "Which exchange course-recognition version applies, "
+            "and can approval wait until after return?"
         )
-
-        print(f"\nQuestion: {question}")
-
         results = search_chunks(
-            question,
-            embedding_client,
-            top_k=3
+            question=question,
+            embedding_client=client,
+            top_k=4,
+            role="Student",
         )
 
-        print("\nRetrieved chunks:")
+        print(f"Question: {question}")
+        print("\nGovernance-aware retrieval results:")
 
         for position, result in enumerate(results, start=1):
             print("\n" + "=" * 60)
             print(f"Rank: {position}")
             print(f"Source: {result['source']}")
-            print(f"Score: {result['score']:.4f}")
+            print(f"Status: {result['status']}")
+            print(f"Final score: {result['score']:.4f}")
+            print(
+                f"Semantic={result['semantic_score']:.4f}, "
+                f"Status={result['status_score']:.4f}, "
+                f"Recency={result['recency_score']:.4f}, "
+                f"Role={result['role_score']:.4f}"
+            )
             print(f"Content: {result['content']}")
-
     finally:
-        if embedding_model.is_loaded:
-            print("\nUnloading the embedding model...")
-            embedding_model.unload()
+        if model.is_loaded:
+            model.unload()
 
 
 if __name__ == "__main__":

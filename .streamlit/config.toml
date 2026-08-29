@@ -9,3 +9,7 @@ font = "sans serif"
 [server]
 runOnSave = false
 fileWatcherType = "none"
+
+[client]
+toolbarMode = "viewer"
+showErrorDetails = "type"

@@ -1,3 +1,0 @@
-Microsoft Foundry Local allows artificial intelligence models to run directly on a user's device. Applications do not require an Azure subscription, an API key, or a permanent internet connection. Foundry Local automatically detects available hardware and selects an appropriate execution provider for CPU, GPU, or NPU acceleration.
-
-Models are downloaded during their first use and stored in a local cache. Later executions can load the cached model without downloading it again. This makes Foundry Local suitable for private, offline, and low-latency AI applications.

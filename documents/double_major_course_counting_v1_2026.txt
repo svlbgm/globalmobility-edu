@@ -1,0 +1,23 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Double-Major Course Counting Policy
+version: 1.0
+status: current_approved
+effective_date: 2026-01-01
+reviewed_date: 2025-12-10
+owner: Registrar and Academic Affairs
+audience: Student, Academic Advisor, Department Administrator
+[/POLICY_METADATA]
+
+Scope
+This policy applies when a student asks whether one completed course can satisfy requirements in both the primary program and the double-major program.
+
+Student responsibility
+The student submits the course code, syllabus, credit value, learning outcomes, and the requirement requested in each program. Submission of a request does not guarantee approval.
+
+Academic review
+The Academic Advisor reviews content overlap and program requirements. The Department Administrator checks curriculum records and previous counting decisions. Only the authorized department committee may approve an exception or final equivalency.
+
+Limitations
+This policy does not provide a universal maximum number of courses that may be counted across both programs. The applicable curriculum and committee decision must be consulted.

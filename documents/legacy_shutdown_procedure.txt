@@ -1,7 +1,0 @@
-DOCUMENT STATUS: Legacy and pending retirement
-OWNER: Former IT Operations Team
-LAST REVIEWED: March 2021
-
-If a workstation displays signs of a serious virus infection, the user should immediately shut down the computer by holding the power button. The computer should remain powered off until a technician is available. The user should then inform a local supervisor by email.
-
-This procedure was written before the organization's current cybersecurity incident playbook. It may contain instructions that conflict with newer evidence-preservation requirements. Employees and managers should verify whether a more recently approved procedure exists before following this document.

@@ -1,102 +1,189 @@
+import re
 from pathlib import Path
-
-from docx import Document
-from pypdf import PdfReader
 
 
 SUPPORTED_EXTENSIONS = {".txt", ".pdf", ".docx"}
 
+METADATA_FIELDS = (
+    "title",
+    "version",
+    "status",
+    "effective_date",
+    "reviewed_date",
+    "owner",
+    "audience",
+    "supersedes",
+    "superseded_by",
+)
 
-def extract_text(file_path: str | Path) -> str:
-    """Extract text from a TXT, PDF, or DOCX file."""
 
-    path = Path(file_path)
+def _read_txt(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
 
-    if not path.exists():
-        raise FileNotFoundError(f"Document not found: {path}")
 
+def _read_pdf(path: Path) -> str:
+    from pypdf import PdfReader
+
+    reader = PdfReader(str(path))
+    return "\n".join(
+        page.extract_text() or ""
+        for page in reader.pages
+    )
+
+
+def _read_docx(path: Path) -> str:
+    from docx import Document
+
+    document = Document(str(path))
+    return "\n".join(
+        paragraph.text
+        for paragraph in document.paragraphs
+    )
+
+
+def read_document(path) -> str:
+    """Extract text from a supported local document."""
+
+    path = Path(path)
     extension = path.suffix.lower()
 
-    if extension not in SUPPORTED_EXTENSIONS:
-        raise ValueError(
-            f"Unsupported file type: {extension}. "
-            f"Supported types: {', '.join(sorted(SUPPORTED_EXTENSIONS))}"
-        )
-
     if extension == ".txt":
-        text = path.read_text(encoding="utf-8")
-
+        text = _read_txt(path)
     elif extension == ".pdf":
-        reader = PdfReader(path)
-        text = "\n".join(
-            page.extract_text() or ""
-            for page in reader.pages
-        )
-
+        text = _read_pdf(path)
+    elif extension == ".docx":
+        text = _read_docx(path)
     else:
-        document = Document(path)
-        text = "\n".join(
-            paragraph.text
-            for paragraph in document.paragraphs
-            if paragraph.text.strip()
+        raise ValueError(
+            f"Unsupported document type: {extension}"
         )
 
-    return text.strip()
+    cleaned = re.sub(r"\r\n?", "\n", text)
+    cleaned = re.sub(r"[ \t]+", " ", cleaned)
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+    return cleaned.strip()
 
 
-def chunk_text(
-    text: str,
-    chunk_size: int = 180,
-    overlap: int = 30
-) -> list[str]:
-    """Split text into overlapping word-based chunks."""
+def parse_policy_metadata(text: str):
+    """Return normalized policy metadata and document body."""
+
+    pattern = re.compile(
+        r"\[POLICY_METADATA\](.*?)\[/POLICY_METADATA\]",
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    match = pattern.search(text)
+
+    metadata = {field: "" for field in METADATA_FIELDS}
+
+    if match:
+        for line in match.group(1).splitlines():
+            if ":" not in line:
+                continue
+
+            key, value = line.split(":", 1)
+            key = key.strip().lower()
+
+            if key in metadata:
+                metadata[key] = value.strip()
+
+        body = pattern.sub("", text).strip()
+    else:
+        body = text.strip()
+        metadata["status"] = "unclassified"
+
+    return metadata, body
+
+
+def chunk_text(text: str, chunk_size=180, overlap=30):
+    """Split text into overlapping word-based sections."""
 
     if chunk_size <= 0:
-        raise ValueError("chunk_size must be greater than zero.")
+        raise ValueError("chunk_size must be positive.")
 
-    if overlap < 0:
-        raise ValueError("overlap cannot be negative.")
-
-    if overlap >= chunk_size:
-        raise ValueError("overlap must be smaller than chunk_size.")
+    if overlap < 0 or overlap >= chunk_size:
+        raise ValueError(
+            "overlap must be between 0 and chunk_size - 1."
+        )
 
     words = text.split()
 
     if not words:
         return []
 
-    chunks = []
-    step_size = chunk_size - overlap
+    step = chunk_size - overlap
+    sections = []
 
-    for start in range(0, len(words), step_size):
-        end = start + chunk_size
-        chunk = " ".join(words[start:end]).strip()
+    for start in range(0, len(words), step):
+        section_words = words[start:start + chunk_size]
 
-        if chunk:
-            chunks.append(chunk)
-
-        if end >= len(words):
+        if not section_words:
             break
 
-    return chunks
+        sections.append(" ".join(section_words))
+
+        if start + chunk_size >= len(words):
+            break
+
+    return sections
 
 
-def process_document(
-    file_path: str | Path,
-    chunk_size: int = 180,
-    overlap: int = 30
-) -> list[dict]:
-    """Extract and chunk a document while preserving its source name."""
+def _mark_line_breaks_as_sentence_boundaries(text: str) -> str:
+    """Give every source line its own sentence-ending punctuation.
 
-    path = Path(file_path)
-    text = extract_text(path)
-    chunks = chunk_text(text, chunk_size, overlap)
+    Headings and paragraphs in these documents are separated only by a
+    newline. Word-based chunking later joins everything with single
+    spaces, which would otherwise erase that boundary and let a short
+    heading word (for example "Approval") collide with an unrelated word
+    inside a real sentence once flattened.
+    """
 
-    return [
-        {
+    marked_lines = []
+
+    for line in text.split("\n"):
+        stripped = line.strip()
+
+        if not stripped:
+            continue
+
+        if stripped[-1] not in ".!?:":
+            stripped += "."
+
+        marked_lines.append(stripped)
+
+    return " ".join(marked_lines)
+
+
+def process_document(path, chunk_size=180, overlap=30):
+    """Extract, classify and chunk a policy document."""
+
+    path = Path(path)
+    text = read_document(path)
+    metadata, body = parse_policy_metadata(text)
+    body = _mark_line_breaks_as_sentence_boundaries(body)
+    sections = chunk_text(body, chunk_size, overlap)
+
+    chunks = []
+
+    for index, content in enumerate(sections):
+        chunk = {
             "source": path.name,
             "chunk_index": index,
-            "content": chunk
+            "content": content,
+            **metadata,
         }
-        for index, chunk in enumerate(chunks)
-    ]
+
+        metadata_summary = (
+            f"Policy title: {metadata['title']}. "
+            f"Version: {metadata['version']}. "
+            f"Status: {metadata['status']}. "
+            f"Effective date: {metadata['effective_date']}. "
+            f"Owner: {metadata['owner']}. "
+            f"Audience: {metadata['audience']}."
+        )
+
+        chunk["embedding_text"] = (
+            f"{metadata_summary}\n{content}"
+        )
+        chunks.append(chunk)
+
+    return chunks

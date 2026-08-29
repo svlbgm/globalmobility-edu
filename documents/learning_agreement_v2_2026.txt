@@ -1,0 +1,24 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Learning Agreement Submission Guide
+version: 2.0
+status: current_approved
+effective_date: 2026-02-01
+reviewed_date: 2026-01-12
+owner: International Programs Office
+audience: Student, Academic Advisor, Department Administrator
+supersedes: learning_agreement_v1_2023.txt
+[/POLICY_METADATA]
+
+Initial submission
+The student uploads the Learning Agreement to the university mobility portal. The document must contain the student signature, the home-institution academic approval, and the host-institution approval. An email attachment alone does not constitute a completed submission.
+
+Changes during mobility
+When the course list changes, the student uploads a revised During Mobility section and an updated course-mapping table. The Academic Advisor checks academic compatibility. The International Programs Office verifies signatures and document completeness.
+
+Final submission
+After mobility, the student uploads the signed After Mobility document and final transcript. The Department Administrator may return an incomplete package without forwarding it for recognition.
+
+Processing time
+No guaranteed response or completion time is stated in this guide.

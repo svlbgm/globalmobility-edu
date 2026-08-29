@@ -1,0 +1,26 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Exchange Program Application Calendar
+version: 1.0
+status: current_approved
+effective_date: 2026-02-01
+reviewed_date: 2026-01-15
+owner: International Programs Office
+audience: Student, Academic Advisor, Department Administrator
+[/POLICY_METADATA]
+
+Purpose
+This synthetic calendar defines the recurring application windows used in the GlobalMobility demonstration for outgoing university exchange mobility. It does not govern course recognition or Learning Agreement changes.
+
+Recurring application windows
+Students may apply during either standard window each academic year: 1–15 March for an exchange beginning in the following autumn semester or full academic year, and 1–15 October for an exchange beginning in the following spring semester. The mobility portal closes at 17:00 Europe/Istanbul on the final day of each window. If a dated application announcement states different dates, that announcement governs the stated cycle.
+
+Student submission
+The student submits the online application form, current transcript, language-proficiency evidence, and ranked host-university preferences through the mobility portal before the window closes. A saved draft or an email attachment is not a completed application.
+
+Responsibilities
+The International Programs Office owns the calendar and publishes cycle-specific announcements. The Academic Advisor may advise on academic suitability but does not extend an application deadline. The Department Administrator has no application-window approval role.
+
+Exceptions and gaps
+This calendar does not create a late-application, deadline-extension, emergency, or portal-reopening process, and it does not specify programme-specific eligibility or selection criteria. An exception is not guaranteed.

@@ -1,0 +1,1 @@
+"""GlobalMobility EDU application package."""

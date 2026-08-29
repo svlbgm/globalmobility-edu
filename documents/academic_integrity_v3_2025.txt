@@ -1,0 +1,23 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Academic Integrity and Generative AI Policy
+version: 3.0
+status: current_approved
+effective_date: 2025-09-01
+reviewed_date: 2025-08-20
+owner: Office of Academic Standards
+audience: Student, Academic Advisor, Department Administrator
+[/POLICY_METADATA]
+
+General rule
+Students must follow the assessment-specific instructions issued by the course instructor. Generative AI use is permitted only when the assessment instructions allow it.
+
+Disclosure
+When AI assistance is permitted, the student must describe the tool and the way it was used. AI-generated text, code, images, or analysis must not be represented as entirely unaided work.
+
+Unclear instructions
+If the assessment instructions do not state whether AI use is allowed, the student must ask the course instructor before using it. GlobalMobility EDU must not infer permission from silence.
+
+Decision authority
+The course instructor determines the permitted use for an assessment. Formal misconduct decisions follow the university disciplinary process; an automated assistant cannot make that decision.

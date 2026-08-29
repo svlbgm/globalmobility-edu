@@ -9,16 +9,27 @@ __pycache__/
 data/*.db
 data/*.sqlite
 data/*.json
+*.log
 
 # Foundry Local model files
 foundry_local_data/
+models/
+*.onnx
+*.gguf
+*.safetensors
 
-# Environment variables
+# Environment variables and editor files
 .env
-
-# VS Code
+.env.*
+!.env.example
+.streamlit/secrets.toml
 .vscode/
 
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Unrelated personal working files found in this directory during
+# development (not produced by this project) — never track these.
+output/
+tmp/

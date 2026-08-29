@@ -1,7 +1,0 @@
-Retrieval-augmented generation, also known as RAG, combines information retrieval with text generation. Before answering a question, a RAG system searches a knowledge base for relevant information.
-
-Documents are divided into smaller sections called chunks. Each chunk is transformed into a numerical representation called an embedding. Embeddings allow the application to compare the semantic meaning of a question with the meaning of document chunks.
-
-The most relevant chunks are added to the prompt as context. The language model then generates an answer using this retrieved context. This process helps reduce hallucinations and makes it possible to answer questions using private or recently updated documents.
-
-A local RAG application keeps document processing, retrieval, and model inference on the user's device. This improves privacy and allows the application to continue working without an internet connection.

@@ -1,0 +1,18 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Exchange Student Frequently Asked Questions
+version: 1.0
+status: legacy_unverified
+effective_date: 2022-02-01
+reviewed_date: 2022-01-20
+owner: International Programs Office
+audience: Student
+superseded_by: exchange_course_recognition_v2_2026.txt, learning_agreement_v2_2026.txt
+[/POLICY_METADATA]
+
+Historical answers
+Students may choose host courses first and request all home-university equivalencies after returning. A Learning Agreement sent by email is normally enough, even without all signatures.
+
+Warning
+This FAQ is an archived and unverified document. Its instructions conflict with the current approved exchange-recognition and Learning Agreement procedures. It must never override a current approved policy.

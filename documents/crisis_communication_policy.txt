@@ -1,9 +1,0 @@
-DOCUMENT STATUS: Current and approved
-OWNER: Corporate Communications
-LAST REVIEWED: May 2026
-
-Only an authorized spokesperson may communicate with journalists, customers, external partners, or the public during a major incident. Employees who receive external questions must not speculate, confirm unverified details, share screenshots, or publish incident information on personal social media accounts. Requests should be forwarded to Corporate Communications.
-
-The incident commander provides verified operational facts to the communications lead. The communications lead prepares an approved holding statement that explains what is known, what actions are being taken, and when the next update is expected. Personal data, security-sensitive technical details, and unconfirmed impact estimates must not be included.
-
-Internal updates should distinguish confirmed facts from assumptions. If information is not yet verified, the update must explicitly label it as under investigation. Communication records and approved statements must be retained in the incident log.

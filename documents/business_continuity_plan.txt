@@ -1,9 +1,0 @@
-DOCUMENT STATUS: Current and approved
-OWNER: Business Continuity Office
-LAST REVIEWED: June 2026
-
-The goal of business continuity management is to maintain critical operations during a disruptive incident. The incident commander determines the overall response level, while department managers assess operational impact and report unavailable systems, affected suppliers, staffing limitations, and expected service delays.
-
-Priority-one activities must be restored or supported through an approved workaround within four hours. Department managers may activate documented manual processes but must not invent unapproved procedures that could create safety, financial, privacy, or compliance risks. Every workaround must have an assigned owner and a time for reassessment.
-
-Operational decisions, temporary workarounds, responsible owners, and recovery times must be recorded in the incident log. If the disruption is expected to exceed four hours, the incident commander should convene the continuity team and issue an internal situation update.

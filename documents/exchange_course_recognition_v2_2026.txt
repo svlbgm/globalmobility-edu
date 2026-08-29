@@ -1,0 +1,27 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Exchange Course Recognition Procedure
+version: 2.0
+status: current_approved
+effective_date: 2026-02-01
+reviewed_date: 2026-01-10
+owner: Academic Affairs Office
+audience: Student, Academic Advisor, Department Administrator
+supersedes: exchange_course_recognition_v1_2022.txt
+[/POLICY_METADATA]
+
+Purpose
+This current procedure governs course-recognition requests for students participating in an international exchange.
+
+Before mobility
+The student must prepare a proposed course-mapping table before mobility. Each host course must be matched with a home-university course and supported by an official course description. The Academic Advisor reviews academic fit. The Department Administrator records the approved mapping in the student information system. A course should not be treated as pre-approved until both reviews are complete.
+
+During mobility
+If a host course changes, the student must submit a revised mapping and updated Learning Agreement. The revised documents must be reviewed before the replacement course is relied upon for recognition.
+
+After mobility
+The student submits the final transcript, signed final Learning Agreement, and final course descriptions. The Academic Advisor verifies that the completed courses match the approved mapping. The Department Administrator sends the verified package to the department committee for the formal recognition decision.
+
+Processing time
+This policy does not specify a guaranteed number of working days for completion.

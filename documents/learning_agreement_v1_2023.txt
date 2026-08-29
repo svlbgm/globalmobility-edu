@@ -1,0 +1,21 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Learning Agreement Submission Guide
+version: 1.0
+status: superseded
+effective_date: 2023-01-15
+reviewed_date: 2023-01-05
+owner: International Programs Office
+audience: Student, Academic Advisor
+superseded_by: learning_agreement_v2_2026.txt
+[/POLICY_METADATA]
+
+Legacy submission method
+Students may email an unsigned Learning Agreement draft to the exchange mailbox. Email receipt is considered sufficient to begin academic review. Digital signatures are optional.
+
+Changes during mobility
+Course changes may be summarized in the body of an email. A revised Learning Agreement is recommended but not required.
+
+Document status
+This guide has been superseded and is preserved only to demonstrate version conflicts. It must not be used for current submissions.

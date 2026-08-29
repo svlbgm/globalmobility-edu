@@ -1,0 +1,20 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Student Academic Appeals Procedure
+version: 2.0
+status: current_approved
+effective_date: 2025-10-01
+reviewed_date: 2025-09-15
+owner: Student Academic Appeals Office
+audience: Student, Academic Advisor, Department Administrator
+[/POLICY_METADATA]
+
+Starting an appeal
+The student submits a written appeal through the student portal and identifies the decision being challenged. The student attaches available supporting evidence and states the requested remedy.
+
+Role boundaries
+An Academic Advisor may explain the published procedure and help the student identify relevant academic records. The advisor must not promise an outcome. A Department Administrator checks whether required fields and attachments are present but does not decide the merits of the appeal.
+
+Missing information
+This procedure does not specify a universal deadline for every type of appeal. The deadline attached to the original decision or the applicable faculty rule must be checked. If that source is not available, the system must report the deadline as unresolved.

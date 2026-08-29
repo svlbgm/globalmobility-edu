@@ -1,0 +1,26 @@
+SYNTHETIC DEMONSTRATION DOCUMENT — NOT AN OFFICIAL UNIVERSITY POLICY
+
+[POLICY_METADATA]
+title: Exchange Partner Institutions
+version: 1.0
+status: current_approved
+effective_date: 2026-02-01
+reviewed_date: 2026-01-15
+owner: International Programs Office
+audience: Student, Academic Advisor, Department Administrator
+[/POLICY_METADATA]
+
+Purpose
+This synthetic document states how a currently recognized exchange partner institution is confirmed for outgoing mobility. It does not govern course recognition, Learning Agreement submission, or the application calendar.
+
+Recognized partner institutions
+This document does not enumerate individual host universities by name. The authoritative list is published and updated exclusively on the mobility portal, because it changes between application cycles as institutional agreements are renewed, suspended, or added. A named institution appearing in an older printed guide or a previous student's experience is not confirmed unless it currently appears on the mobility portal list at the time of application.
+
+Confirming a current agreement
+A student must check the mobility portal's published partner list at the time of application, not at the time of an earlier information session. An Academic Advisor may help a student interpret the published list but does not maintain or issue a separate partner list.
+
+Decision authority
+Only the International Programs Office confirms whether an institution is an active exchange partner for a given cycle. A Department Administrator and an Academic Advisor have no authority to confirm or deny partner status.
+
+Missing information
+This document does not state the total number of partner institutions, guarantee a partner institution in every country or discipline, or guarantee that applying to a partner institution results in admission there. Host-institution capacity and selection are decided separately.
