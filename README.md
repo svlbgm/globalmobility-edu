@@ -217,29 +217,6 @@ The acceptance runner checks response-contract violations, role leakage,
 historical-instruction reuse, invented processing durations and governing-source
 language. It fails fast when a scenario is not presentation-ready.
 
-## Five-minute presentation and demo
-
-1. **0:00–0:40 — Problem.** A semantically similar policy can be obsolete; a
-   normal RAG ranking can therefore return plausible but invalid guidance.
-2. **0:40–1:20 — Architecture.** Show Streamlit → local Flask → Qwen3
-   embeddings/governance reranking → SQLite → Phi-4 Mini. Emphasize that policy
-   documents and inference remain on-device.
-3. **1:20–2:25 — Current versus legacy.** Run **Version conflict** as Student.
-   Point out v2 as `current_approved`, v1 as linked historical evidence and the
-   explicit procedural conflict/difference statement.
-4. **2:25–3:20 — Role boundaries.** Run **Role-aware guidance** as Academic
-   Advisor. Contrast the Advisor action list with Student, Administrator and
-   committee responsibilities.
-5. **3:20–4:05 — Missing information.** Run **Missing information**. Show that
-   no working-day duration is invented.
-6. **4:05–4:40 — Authority beats similarity.** Run **Submission conflict** as
-   Department Administrator. Show the signed portal procedure governing over
-   the superseded unsigned-email instruction.
-7. **4:40–5:00 — Evidence and limits.** Expand one evidence card, open the
-   raw source file to show the citation matches the file on disk exactly,
-   then state that the policies are synthetic and the prototype does not
-   make official academic decisions.
-
 ## Limitations
 
 - The included policies are synthetic demonstration data.
