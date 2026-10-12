@@ -16,14 +16,13 @@ The system is designed to help students navigate Learning Agreements, course-rec
 - English and Turkish interface
 
 ## Screenshots
-
 ### GlobalMobility EDU
 
 ![GlobalMobility EDU interface](images/globalmobility-home.jpg)
 
 ### Source Verification
 
-![GlobalMobility EDU source verification](images/globalmobility-sources.jpg)
+![GlobalMobility EDU source verification](images/globalmobility-verification.jpg)
 
 ## Why Local?
 
