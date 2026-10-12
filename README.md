@@ -19,11 +19,11 @@ The system is designed to help students navigate Learning Agreements, course-rec
 
 ### GlobalMobility EDU
 
-![GlobalMobility EDU interface](images/globalmobility-home.png)
+![GlobalMobility EDU interface](images/globalmobility-home.jpg)
 
 ### Source Verification
 
-![GlobalMobility EDU source verification](images/globalmobility-sources.png)
+![GlobalMobility EDU source verification](images/globalmobility-sources.jpg)
 
 ## Why Local?
 
