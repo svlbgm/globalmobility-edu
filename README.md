@@ -1,8 +1,25 @@
 # GlobalMobility EDU
 
-GlobalMobility EDU is a private, local and version-aware institutional-memory auditor for university policies. It retrieves relevant policy sections, evaluates document authority and produces role-specific guidance with traceable evidence.
+**GlobalMobility EDU** is a fully local, version-aware RAG assistant for university exchange processes, developed as part of the **Microsoft AI Innovators Summer Internship Program 2026**.
 
-The prototype was developed for the Microsoft AI Innovators Summer Internship Program using Microsoft Foundry Local.
+Built with **Microsoft Foundry Local**, the RAG pipeline runs locally on-device — including document processing, embeddings, retrieval, storage, and LLM inference.
+
+The system is designed to help students navigate Learning Agreements, course-recognition requirements, deadlines, and evolving mobility guidelines while providing source-grounded answers with citations.
+
+## Key Features
+
+- Fully local RAG pipeline powered by Microsoft Foundry Local
+- Version-aware document retrieval
+- Source-grounded answers with citations
+- Retrieval informed by relevance, document status, recency, and role
+- Local LLM inference
+- English and Turkish interface
+
+## Why Local?
+
+GlobalMobility EDU performs retrieval and model inference locally, without relying on a cloud inference API. This keeps the AI workflow on-device while reducing dependency on external services.
+
+---
 
 ## Why this is more than a standard RAG chatbot
 
