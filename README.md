@@ -15,6 +15,16 @@ The system is designed to help students navigate Learning Agreements, course-rec
 - Local LLM inference
 - English and Turkish interface
 
+## Screenshots
+
+### GlobalMobility EDU
+
+![GlobalMobility EDU interface](images/globalmobility-home.png)
+
+### Source Verification
+
+![GlobalMobility EDU source verification](images/globalmobility-sources.png)
+
 ## Why Local?
 
 GlobalMobility EDU performs retrieval and model inference locally, without relying on a cloud inference API. This keeps the AI workflow on-device while reducing dependency on external services.
